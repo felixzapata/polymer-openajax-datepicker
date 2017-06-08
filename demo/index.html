@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>polymer-openajax-datepicker demo</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../polymer-openajax-datepicker.html">
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+      </style>
+    </custom-style>
+  </head>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic polymer-openajax-datepicker demo</h3>
+      <demo-snippet>
+        <template>
+          <div id="application" role="application">
+            <label id="date_label" for="date">Date</label>:
+            <input id="date" type="text"/>
+            <button id="bn_date">Select Date...</button> 
+          </div>
+          <polymer-openajax-datepicker></polymer-openajax-datepicker>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
+</html>
