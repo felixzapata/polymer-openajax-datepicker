@@ -115,9 +115,9 @@
     </style>
     <div id="dp1" class="datepicker" aria-hidden="true">
       <div id="month-wrap">
-        <div id="bn_prev" role="button" aria-labelledby="bn_prev-label" tabindex="0"><img class="bn_img" src="http://www.oaa-accessibility.org/media/examples/images/prev.png" alt="<<" /></div>
+        <div id="bn_prev" role="button" aria-labelledby="bn_prev-label" tabindex="0"><img class="bn_img" src="http://www.oaa-accessibility.org/media/examples/images/prev.png" alt="" /></div>
         <div id="month" role="heading" aria-live="assertive" aria-atomic="true">February 2011</div>
-        <div id="bn_next" role="button" aria-labelledby="bn_next-label" tabindex="0"><img class="bn_img" src="http://www.oaa-accessibility.org/media/examples/images/next.png" alt=">>" /></div>
+        <div id="bn_next" role="button" aria-labelledby="bn_next-label" tabindex="0"><img class="bn_img" src="http://www.oaa-accessibility.org/media/examples/images/next.png" alt="" /></div>
       </div>
       <table id="cal" role="grid" aria-labelledby="month" tabindex="0">
         <thead>
@@ -155,7 +155,8 @@
           // div or text box that will receive the selected date string and focus (if modal)
           target: String,
           // true if datepicker should appear in a modal dialog box.
-          bModal: Boolean
+          bModal: Boolean,
+          selectedValue: String
         };
       }
       connectedCallback() {
@@ -341,7 +342,7 @@
         this.$monthObj.innerHTML = this.monthNames[this.month] + ' ' + this.year;
 
         // if offset was specified, set focus on the last day - specified offset
-        if (offset !== null) {
+        if (typeof offset !== 'undefined') {
           numDays = this._calcNumDays(this.year, this.month);
           day = 'day' + (numDays - offset);
 
@@ -384,12 +385,12 @@
         this.$monthObj.innerHTML = this.monthNames[this.month] + ' ' + this.year;
 
         // if offset was specified, set focus on the first day + specified offset
-        if (offset !== null) {
+        if (typeof offset !== 'undefined') {
           day = 'day' + offset;
 
           this.$grid.setAttribute('aria-activedescendant', day);
-          $('#' + day).classList.add('focus');
-          $('#' + day).setAttribute('aria-selected', 'true');
+          this.$grid.querySelector('#' + day).classList.add('focus');
+          this.$grid.querySelector('#' + day).setAttribute('aria-selected', 'true');
         }
 
       }
@@ -450,23 +451,35 @@
       _bindHandlers() {
 
         ////////////////////// bind button handlers //////////////////////////////////
-        this.$prev.addEventListener('click', () => this._handlePrevClick);
-        this.$next.addEventListener('click', () => this._handleNextClick);
 
-        this.$prev.addEventListener('keydown', () => this._handlePrevKeyDown);
-        this.$next.addEventListener('keydown', () => this._handleNextKeyDown);
+        this._handlePrevClick = this._handlePrevClick.bind(this);
+        this._handleNextClick = this._handleNextClick.bind(this);
+        this._handlePrevKeyDown = this._handlePrevKeyDown.bind(this);
+        this._handleNextKeyDown = this._handleNextKeyDown.bind(this);
+        this._handleGridKeyDown = this._handleGridKeyDown.bind(this);
+        this._handleGridKeyPress = this._handleGridKeyPress.bind(this);
+        this._handleGridFocus = this._handleGridFocus.bind(this);
+        this._handleGridBlur = this._handleGridBlur.bind(this);
+        this._handleGridClick = this._handleGridClick.bind(this);
+
+
+        this.$prev.addEventListener('click', this._handlePrevClick);
+        this.$next.addEventListener('click', this._handleNextClick);
+
+        this.$prev.addEventListener('keydown', this._handlePrevKeyDown);
+        this.$next.addEventListener('keydown', this._handleNextKeyDown);
 
 
         ///////////// bind grid handlers //////////////
 
-        this.$grid.addEventListener('keydown', () => this._handleGridKeyDown);
-        this.$grid.addEventListener('keypress', () => this._handleGridKeyPress);
+        this.$grid.addEventListener('keydown', this._handleGridKeyDown);
+        this.$grid.addEventListener('keypress', this._handleGridKeyPress);
 
-        this.$grid.addEventListener('focus', () => this._handleGridFocus);
-        this.$grid.addEventListener('blur', () => this._handleGridBlur);
+        this.$grid.addEventListener('focus', this._handleGridFocus);
+        this.$grid.addEventListener('blur', this._handleGridBlur);
 
 
-        this.$grid.querySelector('td').addEventListener('click', () => this._handleGridClick);
+        this.$grid.querySelector('td').addEventListener('click', this._handleGridClick);
 
       }
 
@@ -479,7 +492,7 @@
       //
       _handlePrevClick(e) {
 
-        var active = this.$grid.setAttribute('aria-activedescendant');
+        var active = this.$grid.getAttribute('aria-activedescendant');
 
         if (e.ctrlKey) {
           this._showPrevYear();
@@ -509,7 +522,7 @@
       //
       _handleNextClick(e) {
 
-        var active = this.$grid.setAttribute('aria-activedescendant');
+        var active = this.$grid.getAttribute('aria-activedescendant');
 
         if (e.ctrlKey) {
           this._showNextYear();
@@ -619,7 +632,8 @@
 
         var $rows = this.$grid.querySelector('tbody tr');
         var $curDay = this.$id.querySelector('#' + this.$grid.getAttribute('aria-activedescendant'));
-        var $days = this.$grid.querySelector(':not(td.empty)');
+        var $days = this.$grid.querySelectorAll('td:not(.empty)');
+        var $daysArray = [].slice.call($days);
         var $curRow = $curDay.parentNode;
 
         if (e.altKey) {
@@ -649,7 +663,7 @@
             }
 
             // update the target box
-            this.$target.value = (this.month < 9 ? '0' : '') + (this.month + 1) + '/' + $curDay.html() + '/' + this.year;
+            this.selectedValue = (this.month < 9 ? '0' : '') + (this.month + 1) + '/' + $curDay.innerHTML + '/' + this.year;
 
             // fall through
           }
@@ -666,11 +680,11 @@
               return true;
             }
 
-            var dayIndex = $days.index($curDay) - 1;
+            var dayIndex = $daysArray.indexOf($curDay) - 1;
             var $prevDay = null;
 
             if (dayIndex >= 0) {
-              $prevDay = $days.eq(dayIndex);
+              $prevDay = $days[dayIndex];
 
               $curDay.classList.remove('focus');
               $curDay.setAttribute('aria-selected', 'false');
@@ -692,11 +706,11 @@
               return true;
             }
 
-            var dayIndex = $days.index($curDay) + 1;
+            var dayIndex = $daysArray.indexOf($curDay) + 1;
             var $nextDay = null;
 
             if (dayIndex < $days.length) {
-              $nextDay = $days.eq(dayIndex);
+              $nextDay = $days[dayIndex];
               $curDay.classList.remove('focus');
               $curDay.setAttribute('aria-selected', 'false');
               $nextDay.classList.add('focus');
@@ -718,11 +732,11 @@
               return true;
             }
 
-            var dayIndex = $days.index($curDay) - 7;
+            var dayIndex = $daysArray.indexOf($curDay) - 7;
             var $prevDay = null;
 
             if (dayIndex >= 0) {
-              $prevDay = $days.eq(dayIndex);
+              $prevDay = $days[dayIndex];
 
               $curDay.classList.remove('focus');
               $curDay.setAttribute('aria-selected', 'false');
@@ -733,7 +747,7 @@
             }
             else {
               // move to appropriate day in previous month
-              dayIndex = 6 - $days.index($curDay);
+              dayIndex = 6 - $daysArray.indexOf($curDay);
 
               this._showPrevMonth(dayIndex);
             }
@@ -747,11 +761,11 @@
               return true;
             }
 
-            var dayIndex = $days.index($curDay) + 7;
+            var dayIndex = $daysArray.indexOf($curDay) + 7;
             var $prevDay = null;
 
             if (dayIndex < $days.length) {
-              $prevDay = $days.eq(dayIndex);
+              $prevDay = $days[dayIndex];
 
               $curDay.classList.remove('focus');
               $curDay.setAttribute('aria-selected', 'false');
@@ -762,7 +776,7 @@
             }
             else {
               // move to appropriate day in next month
-              dayIndex = 8 - ($days.length - $days.index($curDay));
+              dayIndex = 8 - ($days.length - $daysArray.indexOf($curDay));
 
               this._showNextMonth(dayIndex);
             }
@@ -975,8 +989,8 @@
       // @return (boolean) true
       //
       _handleGridBlur(e) {
-        this.$id.querySelector('#' + this.$grid.setAttribute('aria-activedescendant')).classList.remove('focus');
-        this.$id.querySelector('#' + this.$grid.setAttribute('aria-activedescendant')).setAttribute('aria-selected', 'false');
+        this.$id.querySelector('#' + this.$grid.getAttribute('aria-activedescendant')).classList.remove('focus');
+        this.$id.querySelector('#' + this.$grid.getAttribute('aria-activedescendant')).setAttribute('aria-selected', 'false');
         return true;
 
       }
@@ -1022,7 +1036,7 @@
         this.$id.setAttribute('aria-hidden', 'true');
 
         // set focus on the focus target
-        this.$target.focus();
+        //this.$target.focus();
 
       }
     }
