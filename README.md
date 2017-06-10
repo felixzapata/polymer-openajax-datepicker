@@ -1,6 +1,6 @@
 # \<polymer-openajax-datepicker\>
 
-Polymer component from the [Date Picker from Open Ajax Alliance](http://www.oaa-accessibility.org/examplep/datepicker1/).
+Polymer component based on the [Date Picker from Open Ajax Alliance](http://www.oaa-accessibility.org/examplep/datepicker1/).
 
 ## WORK IN PROGRESS
 
