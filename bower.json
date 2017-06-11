@@ -10,7 +10,7 @@
   "authors": [
     "Felix Zapata <fzberlinches@gmail.com>"
   ],
-  "description": "Polymer component based on the Date Picker from Open Ajax Alliance",
+  "description": "Polymer component based on the accessible Date Picker from Open Ajax Alliance",
   "keywords": [
     "web-component",
     "web-components",

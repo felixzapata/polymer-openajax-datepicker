@@ -2,7 +2,7 @@
 
 # \<polymer-openajax-datepicker\>
 
-Polymer component based on the [Date Picker from Open Ajax Alliance](http://www.oaa-accessibility.org/examplep/datepicker1/).
+Polymer component based on the accessible [Date Picker from Open Ajax Alliance](http://www.oaa-accessibility.org/examplep/datepicker1/).
 
 ```html
   <label id="date_label" for="date">Date</label>:
