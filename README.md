@@ -1,3 +1,5 @@
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/felixzapata/polymer-openajax-datepicker)
+
 # \<polymer-openajax-datepicker\>
 
 Polymer component based on the [Date Picker from Open Ajax Alliance](http://www.oaa-accessibility.org/examplep/datepicker1/).
