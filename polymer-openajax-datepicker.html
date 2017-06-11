@@ -161,8 +161,6 @@
       static get is() { return 'polymer-openajax-datepicker'; }
       static get properties() {
         return {
-          // div or text box that will receive the selected date string and focus (if modal)
-          target: String,
           // true if datepicker should appear in a modal dialog box.
           bModal: Boolean,
           date: {
@@ -179,8 +177,6 @@
         this.$prev = this.$id.querySelector('#bn_prev');
         this.$next = this.$id.querySelector('#bn_next');
         this.$grid = this.$id.querySelector('#cal');
-        // div or text box that will receive the selected date string and focus (if modal)
-        this.$target = this.$id.querySelector('#' + this.target);
 
 
         this.monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -1049,7 +1045,7 @@
         this.$id.setAttribute('aria-hidden', 'true');
 
         // set focus on the focus target
-        //this.$target.focus();
+        // TODO
 
       }
     }
