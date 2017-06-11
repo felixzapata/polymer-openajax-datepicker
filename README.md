@@ -39,10 +39,11 @@ Or [download as ZIP](https://github.com/felixzapata/polymer-openajax-datepicker/
 
 ## TODO
 
-+ Add i18n and l10n
-+ Add tests
-+ Add more custom CSS properties
-+ Set focus on the focus target
++ Fix Firefox issues.
++ Add i18n and l10n.
++ Add tests.
++ Add more custom CSS properties.
++ Set focus on the focus target.
 
 ## Install the Polymer-CLI
 
