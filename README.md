@@ -64,6 +64,11 @@ $ polymer serve
 
 ## History
 
+### 0.1.2
+
++ Fixes Firefox issues
++ Fixes [#1](https://github.com/felixzapata/polymer-openajax-datepicker/issues/1)
+
 ### 0.1.1
 
 + Fixes how to show the calendar under Firefox
