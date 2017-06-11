@@ -165,7 +165,10 @@
           target: String,
           // true if datepicker should appear in a modal dialog box.
           bModal: Boolean,
-          selectedValue: String
+          date: {
+            type: String,
+            notify: true
+          }
         };
       }
       connectedCallback() {
@@ -487,8 +490,9 @@
         this.$grid.addEventListener('focus', this._handleGridFocus);
         this.$grid.addEventListener('blur', this._handleGridBlur);
 
-
-        this.$grid.querySelector('td').addEventListener('click', this._handleGridClick);
+        Array.from(this.$grid.querySelectorAll('td')).forEach(cell => {
+          cell.addEventListener('click', this._handleGridClick);
+        });
 
       }
 
@@ -672,7 +676,7 @@
             }
 
             // update the target box
-            this.selectedValue = (this.month < 9 ? '0' : '') + (this.month + 1) + '/' + $curDay.innerHTML + '/' + this.year;
+            this.set('date', (this.month < 9 ? '0' : '') + (this.month + 1) + '/' + $curDay.innerHTML + '/' + this.year);
 
             // fall through
           }
@@ -941,8 +945,8 @@
       //
       // @return (boolean) false if consuming event, true if propagating
       //
-      _handleGridClick(id, e) {
-        var $cell = this.$.$id.querySelector(id);
+      _handleGridClick(e) {
+        var $cell = e.target;
         if (this._is($cell, '.empty')) {
           return true;
         }
@@ -956,7 +960,7 @@
         var $curDay = this.$id.querySelector('#' + this.$grid.getAttribute('aria-activedescendant'));
 
         // update the target box
-        this.$target.value = (this.month < 9 ? '0' : '') + (this.month + 1) + '/' + $curDay.html() + '/' + this.year;
+        this.set('date', (this.month < 9 ? '0' : '') + (this.month + 1) + '/' + $curDay.innerHTML + '/' + this.year);
 
         // dismiss the dialog box
         this._hideDlg();
