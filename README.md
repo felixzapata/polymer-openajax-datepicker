@@ -65,6 +65,14 @@ $ polymer serve
 
 ## History
 
+### 0.1.1
+
++ Fixes how to show the calendar under Firefox
+
+### 0.1.0
+
++ Initial realease 
+
 ## License
 
 [MIT License](https://opensource.org/licenses/MIT)
