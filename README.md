@@ -11,6 +11,16 @@ Polymer component based on the [Date Picker from Open Ajax Alliance](http://www.
   <polymer-openajax-datepicker id="datePicker" date="{{datepickerValue}}"></polymer-openajax-datepicker>
 ```
 
+## Installation
+
+Install the component using [Bower](http://bower.io/):
+
+```sh
+$ bower install polymer-openajax-datepicker --save
+```
+
+Or [download as ZIP](https://github.com/felixzapata/polymer-openajax-datepicker/archive/master.zip).
+
 ## Keyboard support
 
 
