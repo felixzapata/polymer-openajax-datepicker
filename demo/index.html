@@ -1,36 +1,48 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <title>polymer-openajax-datepicker demo</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <title>polymer-openajax-datepicker demo</title>
 
-    <link rel="import" href="../../paper-button/paper-button.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-    <link rel="import" href="../polymer-openajax-datepicker.html">
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 
-    <custom-style>
-      <style is="custom-style" include="demo-pages-shared-styles">
-      </style>
-    </custom-style>
-  </head>
-  <body>
-    <div class="vertical-section-container centered">
-      <h3>Basic polymer-openajax-datepicker demo</h3>
-      <demo-snippet>
-        <template>
-          <div id="application" role="application">
-            <label id="date_label" for="date">Date</label>:
-            <input id="date" type="text"/>
-            <paper-button onclick="datePicker.showDlg()">Select Date...</paper-button> 
-          </div>
-          <polymer-openajax-datepicker id="datePicker"></polymer-openajax-datepicker>
-        </template>
-      </demo-snippet>
-    </div>
-  </body>
+  <link rel="import" href="../../paper-button/paper-button.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../polymer-openajax-datepicker.html">
+
+  <custom-style>
+    <style is="custom-style" include="demo-pages-shared-styles">
+
+    </style>
+  </custom-style>
+</head>
+
+<body>
+  <div class="vertical-section-container centered">
+    <h3>Basic polymer-openajax-datepicker demo</h3>
+    <demo-snippet>
+      <template>
+        <dom-bind>
+          <template>
+            <div id="application" role="application">
+              <label id="date_label" for="date">Date</label>:
+              <input id="date" type="text" value="[[datepickerValue]]" />
+              <paper-button onclick="datePicker.showDlg()">Select Date...</paper-button>
+            </div>
+            <polymer-openajax-datepicker id="datePicker" date="{{datepickerValue}}"></polymer-openajax-datepicker>
+          </template>
+        </dom-bind>
+      </template>
+      <script>
+        var demo = document.querySelector('dom-bind');
+        demo.datepickerValue = '';  
+      </script>
+    </demo-snippet>
+  </div>
+</body>
+
 </html>
