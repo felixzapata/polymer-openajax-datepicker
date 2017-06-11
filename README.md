@@ -39,7 +39,6 @@ Or [download as ZIP](https://github.com/felixzapata/polymer-openajax-datepicker/
 
 ## TODO
 
-+ Fix Firefox issues.
 + Add i18n and l10n.
 + Add tests.
 + Add more custom CSS properties.
