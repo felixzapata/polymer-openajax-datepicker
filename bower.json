@@ -1,6 +1,33 @@
 {
   "name": "polymer-openajax-datepicker",
   "main": "polymer-openajax-datepicker.html",
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/felixzapata/polymer-openajax-datepicker.git"
+  },
+  "homepage": "https://github.com/felixzapata/polymer-openajax-datepicker",
+  "authors": [
+    "Felix Zapata <fzberlinches@gmail.com>"
+  ],
+  "description": "Polymer component based on the Date Picker from Open Ajax Alliance",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer",
+    "calendar",
+    "date",
+    "a11y",
+    "datepicker",
+    "webcomponents"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0"
   },
