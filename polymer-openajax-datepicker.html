@@ -220,6 +220,7 @@
         this.$grid.setAttribute('aria-activedescendant', this.$grid.querySelector('.today').getAttribute('id'));
 
         this._bindHandlers();
+        this._bindCellsClickHandlers();
 
         // hide dialog if in modal mode
         if (this.bModal === true) {
@@ -346,6 +347,7 @@
 
         // populate the calendar grid
         this._popGrid();
+        this._bindCellsClickHandlers();
 
         this.$monthObj.innerHTML = this.monthNames[this.month] + ' ' + this.year;
 
@@ -389,6 +391,7 @@
 
         // populate the calendar grid
         this._popGrid();
+        this._bindCellsClickHandlers();
 
         this.$monthObj.innerHTML = this.monthNames[this.month] + ' ' + this.year;
 
@@ -422,6 +425,7 @@
 
         // populate the calendar grid
         this._popGrid();
+        this._bindCellsClickHandlers();
 
         this.$monthObj.innerHTML = this.monthNames[this.month] + ' ' + this.year;
 
@@ -446,9 +450,23 @@
 
         // populate the calendar grid
         this._popGrid();
+        this._bindCellsClickHandlers();
 
         this.$monthObj.innerHTML = this.monthNames[this.month] + ' ' + this.year;
 
+      }
+
+      //
+      // _bindCellsClickHandlers() is a member function to bind event handlers for days of the calendar
+      //
+      // @return N/A
+      //
+
+      _bindCellsClickHandlers() {
+        this._handleGridClick = this._handleGridClick.bind(this);
+        Array.from(this.$grid.querySelectorAll('td')).forEach(cell => {
+          cell.addEventListener('click', this._handleGridClick);
+        });
       }
 
       //
@@ -468,7 +486,7 @@
         this._handleGridKeyPress = this._handleGridKeyPress.bind(this);
         this._handleGridFocus = this._handleGridFocus.bind(this);
         this._handleGridBlur = this._handleGridBlur.bind(this);
-        this._handleGridClick = this._handleGridClick.bind(this);
+        
 
 
         this.$prev.addEventListener('click', this._handlePrevClick);
@@ -486,9 +504,6 @@
         this.$grid.addEventListener('focus', this._handleGridFocus);
         this.$grid.addEventListener('blur', this._handleGridBlur);
 
-        Array.from(this.$grid.querySelectorAll('td')).forEach(cell => {
-          cell.addEventListener('click', this._handleGridClick);
-        });
 
       }
 
