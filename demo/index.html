@@ -24,9 +24,9 @@
 <body>
   <div class="vertical-section-container centered">
     <h3>Basic polymer-openajax-datepicker demo</h3>
-    <demo-snippet>
+    <!--demo-snippet>
       <template>
-        <dom-bind>
+        <dom-bind id="cal1">
           <template>
             <div id="application" role="application">
               <label id="date_label" for="date">Date</label>:
@@ -38,10 +38,32 @@
         </dom-bind>
       </template>
       <script>
-        var demo = document.querySelector('dom-bind');
+        var demo = document.querySelector('#cal1');
+        demo.datepickerValue = '';  
+      </script>
+    </demo-snippet-->
+
+    <h3>i18n</h3>
+    <demo-snippet>
+      <template>
+        <dom-bind id="cal2">
+          <template>
+            <div id="application" role="application">
+              <label id="date_label" for="date">Date</label>:
+              <input id="date" type="text" value="[[datepickerValue]]" />
+              <paper-button onclick="datePicker.showDlg()">Select Date...</paper-button>
+            </div>
+            <polymer-openajax-datepicker locale="es" id="datePicker" date="{{datepickerValue}}"></polymer-openajax-datepicker>
+          </template>
+        </dom-bind>
+      </template>
+      <script>
+        var demo = document.querySelector('#cal2');
         demo.datepickerValue = '';  
       </script>
     </demo-snippet>
+
+    
   </div>
 </body>
 

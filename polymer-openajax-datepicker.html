@@ -1,19 +1,20 @@
 <link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../moment-element/moment-with-locales-import.html">
 
 <dom-module id="polymer-openajax-datepicker">
   <template>
     <style>
        :host {
         display: block;
-         --datepicker-background-color:#fff;
-         --datepicker-month-color: #ddd;
-         --datepicker-width:261px;
-         --datepicker-zindex:1000;
-         --datepicker-cells-color:#ddd;
-         --datepicker-currentday-color:#FFF0C4;
-         --datepicker-cellempty-color:#f9f9f9;
-         --datepicker-buttons-hover:#fc3;
-         --datepicker-buttons-focus:#fc3;
+        --datepicker-background-color: #fff;
+        --datepicker-month-color: #ddd;
+        --datepicker-width: 261px;
+        --datepicker-zindex: 1000;
+        --datepicker-cells-color: #ddd;
+        --datepicker-currentday-color: #FFF0C4;
+        --datepicker-cellempty-color: #f9f9f9;
+        --datepicker-buttons-hover: #fc3;
+        --datepicker-buttons-focus: #fc3;
       }
 
       .datepicker {
@@ -125,20 +126,11 @@
     <div id="dp1" class="datepicker" aria-hidden="true">
       <div id="month-wrap">
         <div id="bn_prev" role="button" aria-labelledby="bn_prev-label" tabindex="0"><img class="bn_img" src$="[[importPath]]images/prev.png" alt="" /></div>
-        <div id="month" role="heading" aria-live="assertive" aria-atomic="true">February 2011</div>
+        <div id="month" role="heading" aria-live="assertive" aria-atomic="true"></div>
         <div id="bn_next" role="button" aria-labelledby="bn_next-label" tabindex="0"><img class="bn_img" src="[[importPath]]images/next.png" alt="" /></div>
       </div>
       <table id="cal" role="grid" aria-labelledby="month" tabindex="0">
         <thead>
-          <tr id="weekdays">
-            <th id="Sunday"><abbr title="Sunday">Su</abbr></th>
-            <th id="Monday"><abbr title="Monday">Mo</abbr></th>
-            <th id="Tuesday"><abbr title="Tuesday">Tu</abbr></th>
-            <th id="Wednesday"><abbr title="Wednesday">We</abbr></th>
-            <th id="Thursday"><abbr title="Thursday">Th</abbr></th>
-            <th id="Friday"><abbr title="Friday">Fr</abbr></th>
-            <th id="Saturday"><abbr title="Saturday">Sa</abbr></th>
-          </tr>
         </thead>
         <tbody>
         </tbody>
@@ -166,6 +158,12 @@
           date: {
             type: String,
             notify: true
+          },
+          locale: {
+            type: String,
+            value: 'en',
+            notify: true,
+            observer: '_localeChanged'
           }
         };
       }
@@ -177,12 +175,6 @@
         this.$prev = this.$id.querySelector('#bn_prev');
         this.$next = this.$id.querySelector('#bn_next');
         this.$grid = this.$id.querySelector('#cal');
-
-
-        this.monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-          'July', 'August', 'September', 'October', 'November', 'December'];
-
-        this.dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
         this.dateObj = new Date();
 
@@ -213,6 +205,9 @@
         // display the current month
         this.$monthObj.innerHTML = this.monthNames[this.month] + ' ' + this.year;
 
+        // populate the header of the calendar
+        this._popHeader();
+
         // populate the calendar grid
         this._popGrid();
 
@@ -235,6 +230,24 @@
           return false;
         }
       }
+
+      _popHeader() {
+        var thead = this.$grid.querySelector('thead');
+        var weekday = 0;
+        var cellsHeader = '\t<tr id="row1">\n';
+
+        // Insert the leading empty cells
+        for (;weekday < 7; weekday++) {
+          cellsHeader += '\t\t<th id="' + this.dayNames[weekday]  + '"><abbr title="' + this.dayNames[weekday] +  '">' + this.dayNamesAbbr[weekday]  + '</abbr></th>\n';
+        }
+
+        cellsHeader += '</tr>';
+
+
+        thead.insertAdjacentHTML('beforeend', cellsHeader);
+
+      }
+
       //
       // _popGrid() is a member function to populate the datepicker grid with calendar days
       // representing the current month
@@ -298,6 +311,23 @@
         $tbody.insertAdjacentHTML('beforeend', gridCells);
       }
 
+      _localeChanged(locale) {
+        var localeMoment = moment();
+        var weekdays = [];
+        var months = [];
+        var weekdaysAbbr = [];
+        localeMoment.locale(locale);
+        for (var i=0; i<7; i++) {
+          weekdays.push(localeMoment.weekday(i).format('dddd'));
+          weekdaysAbbr.push(localeMoment.weekday(i).format('dd'));
+          months.push(localeMoment.month(i).format('MMMM'));
+        }
+        this.dayNames = weekdays;
+        this.dayNamesAbbr = weekdaysAbbr;
+        this.monthNames = months;
+        //this._firstDayOfWeek = localeMoment.weekday(0).format('d');
+      }
+
       //
       // _calcNumDays() is a member function to calculate the number of days in a given month
       //
@@ -314,7 +344,7 @@
       // @return (integer) number representing the day of the week (0=Sunday....6=Saturday)
       //
       _calcStartWeekday(year, month) {
-        return new Date(year, month, 1).getDay();
+        return moment(new Date(year, month, 1)).locale(this.locale).weekday();
       }
 
       //
@@ -486,7 +516,7 @@
         this._handleGridKeyPress = this._handleGridKeyPress.bind(this);
         this._handleGridFocus = this._handleGridFocus.bind(this);
         this._handleGridBlur = this._handleGridBlur.bind(this);
-        
+
 
 
         this.$prev.addEventListener('click', this._handlePrevClick);
