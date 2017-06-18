@@ -492,6 +492,10 @@
       // @return N/A
       //
 
+      _setSelectedDate(curDay) {
+        this.set('date', moment([this.year, this.month, curDay.innerText]).locale(this.locale).format('L'));
+      }
+
       _bindCellsClickHandlers() {
         this._handleGridClick = this._handleGridClick.bind(this);
         Array.from(this.$grid.querySelectorAll('td')).forEach(cell => {
@@ -716,8 +720,8 @@
               return true;
             }
 
-            // update the target box
-            this.set('date', (this.month < 9 ? '0' : '') + (this.month + 1) + '/' + $curDay.innerHTML + '/' + this.year);
+            // update date selected
+            this._setSelectedDate($curDay);
 
             // fall through
           }
@@ -1000,8 +1004,8 @@
 
         var $curDay = this.$id.querySelector('#' + this.$grid.getAttribute('aria-activedescendant'));
 
-        // update the target box
-        this.set('date', (this.month < 9 ? '0' : '') + (this.month + 1) + '/' + $curDay.innerHTML + '/' + this.year);
+        // update date selected
+        this._setSelectedDate($curDay);
 
         // dismiss the dialog box
         this._hideDlg();
