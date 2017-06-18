@@ -23,13 +23,14 @@
 
 <body>
   <div class="vertical-section-container centered">
-    <h3>Basic polymer-openajax-datepicker demo</h3>
-    <!--demo-snippet>
+    <h1>Basic polymer-openajax-datepicker demo</h1>
+    <h2>Default language</h2>
+    <demo-snippet>
       <template>
-        <dom-bind id="cal1">
+        <dom-bind id="demo1">
           <template>
-            <div id="application" role="application">
-              <label id="date_label" for="date">Date</label>:
+            <div role="application">
+              <label for="date">Date:</label>
               <input id="date" type="text" value="[[datepickerValue]]" />
               <paper-button onclick="datePicker.showDlg()">Select Date...</paper-button>
             </div>
@@ -38,32 +39,31 @@
         </dom-bind>
       </template>
       <script>
-        var demo = document.querySelector('#cal1');
-        demo.datepickerValue = '';  
+        var demo1 = document.querySelector('#demo1');
+        demo1.datepickerValue = '';  
       </script>
-    </demo-snippet-->
+    </demo-snippet>
 
-    <h3>i18n</h3>
+    <h2>Using locale attribute</h2>
     <demo-snippet>
       <template>
-        <dom-bind id="cal2">
+        <dom-bind id="demo2">
           <template>
-            <div id="application" role="application">
-              <label id="date_label" for="date">Date</label>:
-              <input id="date" type="text" value="[[datepickerValue]]" />
-              <paper-button onclick="datePicker.showDlg()">Select Date...</paper-button>
+            <div role="application">
+              <label for="date2">Date:</label>
+              <input id="date2" type="text" value="[[datepickerValue]]" />
+              <paper-button onclick="datePicker2.showDlg()">Select Date...</paper-button>
             </div>
-            <polymer-openajax-datepicker locale="es" id="datePicker" date="{{datepickerValue}}"></polymer-openajax-datepicker>
+            <polymer-openajax-datepicker locale="es" id="datePicker2" date="{{datepickerValue}}"></polymer-openajax-datepicker>
           </template>
         </dom-bind>
       </template>
       <script>
-        var demo = document.querySelector('#cal2');
-        demo.datepickerValue = '';  
+        var demo2 = document.querySelector('#demo2');
+        demo2.datepickerValue = '';
       </script>
     </demo-snippet>
 
-    
   </div>
 </body>
 
