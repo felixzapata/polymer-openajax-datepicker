@@ -231,6 +231,12 @@
         }
       }
 
+      //
+      // _popHeader() is a member function to populate the datepicker header with days of the week
+      //
+      // @return N/A
+      //
+
       _popHeader() {
         var thead = this.$grid.querySelector('thead');
         var weekday = 0;
@@ -311,6 +317,11 @@
         $tbody.insertAdjacentHTML('beforeend', gridCells);
       }
 
+      //
+      // _localeChanged() is a member function to localize the months and the days of the week using Moment.js
+      //
+      // @return N/A
+      //
       _localeChanged(locale) {
         var localeMoment = moment();
         var weekdays = [];
@@ -489,15 +500,19 @@
       }
 
       //
-      // _bindCellsClickHandlers() is a member function to bind event handlers for days of the calendar
+      // _setSelectedDate() is a member function to localize and format the selected date using Moment.js
       //
       // @return N/A
       //
-
       _setSelectedDate(curDay) {
         this.set('date', moment([this.year, this.month, curDay.innerText]).locale(this.locale).format('L'));
       }
 
+      //
+      // _bindCellsClickHandlers() is a member function to bind event handlers for days of the calendar
+      //
+      // @return N/A
+      //
       _bindCellsClickHandlers() {
         this._handleGridClick = this._handleGridClick.bind(this);
         Array.from(this.$grid.querySelectorAll('td')).forEach(cell => {
