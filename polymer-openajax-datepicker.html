@@ -316,16 +316,18 @@
         var weekdays = [];
         var months = [];
         var weekdaysAbbr = [];
+        var i = 0;
         localeMoment.locale(locale);
-        for (var i=0; i<7; i++) {
+        for (; i < 7; i++) {
           weekdays.push(localeMoment.weekday(i).format('dddd'));
           weekdaysAbbr.push(localeMoment.weekday(i).format('dd'));
+        }
+        for (i = 0; i < 12; i++) {
           months.push(localeMoment.month(i).format('MMMM'));
         }
         this.dayNames = weekdays;
         this.dayNamesAbbr = weekdaysAbbr;
         this.monthNames = months;
-        //this._firstDayOfWeek = localeMoment.weekday(0).format('d');
       }
 
       //
