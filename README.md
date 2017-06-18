@@ -39,7 +39,6 @@ Or [download as ZIP](https://github.com/felixzapata/polymer-openajax-datepicker/
 
 ## TODO
 
-+ Add i18n and l10n.
 + Add tests.
 + Add more custom CSS properties.
 + Set focus on the focus target.
@@ -63,6 +62,10 @@ $ polymer serve
 5. Submit a pull request
 
 ## History
+
+### 0.2.0
+
++ Add support for i18n using Moment.js. It fixes [#2](https://github.com/felixzapata/polymer-openajax-datepicker/issues/2), [#3](https://github.com/felixzapata/polymer-openajax-datepicker/issues/3) and [#4](https://github.com/felixzapata/polymer-openajax-datepicker/issues/4)
 
 ### 0.1.2
 
