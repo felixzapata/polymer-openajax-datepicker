@@ -37,11 +37,11 @@
             <polymer-openajax-datepicker id="datePicker" date="{{datepickerValue}}"></polymer-openajax-datepicker>
           </template>
         </dom-bind>
+        <script>
+          var demo1 = document.querySelector('#demo1');
+          demo1.datepickerValue = '';
+        </script>
       </template>
-      <script>
-        var demo1 = document.querySelector('#demo1');
-        demo1.datepickerValue = '';  
-      </script>
     </demo-snippet>
 
     <h2>Using locale attribute</h2>
@@ -57,11 +57,11 @@
             <polymer-openajax-datepicker locale="es" id="datePicker2" date="{{datepickerValue}}"></polymer-openajax-datepicker>
           </template>
         </dom-bind>
+        <script>
+          var demo2 = document.querySelector('#demo2');
+          demo2.datepickerValue = '';
+        </script>
       </template>
-      <script>
-        var demo2 = document.querySelector('#demo2');
-        demo2.datepickerValue = '';
-      </script>
     </demo-snippet>
 
   </div>
