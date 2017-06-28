@@ -63,6 +63,10 @@ $ polymer serve
 
 ## History
 
+### 0.2.1
+
++ Merge pull request [#9](https://github.com/felixzapata/polymer-openajax-datepicker/pull/9) to resolve conflict after the install of Bower
+
 ### 0.2.0
 
 + Add support for i18n using Moment.js. It fixes [#2](https://github.com/felixzapata/polymer-openajax-datepicker/issues/2), [#3](https://github.com/felixzapata/polymer-openajax-datepicker/issues/3) and [#4](https://github.com/felixzapata/polymer-openajax-datepicker/issues/4)
