@@ -143,7 +143,7 @@
   <script>
     /**
      * `polymer-openajax-datepicker`
-     * 
+     * Polymer component based on the accessible Date Picker from Open Ajax Alliance
      *
      * @customElement
      * @polymer
@@ -153,12 +153,22 @@
       static get is() { return 'polymer-openajax-datepicker'; }
       static get properties() {
         return {
-          // true if datepicker should appear in a modal dialog box.
+          /**
+           * True if datepicker should appear in a modal dialog box.
+           */
           bModal: Boolean,
+          /**
+           * The selected date
+           */
           date: {
             type: String,
             notify: true
           },
+          /**
+           * Localize the calendar.
+           * Based on Moment.js
+           * https://momentjs.com/docs/#/i18n/
+           */
           locale: {
             type: String,
             value: 'en',
