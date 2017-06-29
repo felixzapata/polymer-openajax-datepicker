@@ -63,6 +63,10 @@ $ polymer serve
 
 ## History
 
+### 0.2.2
+
++ Fixes [#8](https://github.com/felixzapata/polymer-openajax-datepicker/issues/8)
+
 ### 0.2.1
 
 + Merge pull request [#9](https://github.com/felixzapata/polymer-openajax-datepicker/pull/9) to resolve conflict after the install of Bower
