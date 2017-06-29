@@ -195,8 +195,6 @@
         this.month = this.curMonth;
         this.currentDate = true;
 
-        this.date = this.dateObj.getDate();
-
         this.keys = {
           tab: 9,
           enter: 13,
@@ -278,6 +276,7 @@
         var curDay = 1;
         var rowCount = 1;
         var $tbody = this.$grid.querySelector('tbody');
+        var dayOfMonth = this.dateObj.getDate();
 
         var gridCells = '\t<tr id="row1">\n';
 
@@ -293,7 +292,7 @@
         // insert the days of the month.
         for (curDay = 1; curDay <= numDays; curDay++) {
 
-          if (curDay === this.date && this.currentDate === true) {
+          if (curDay === dayOfMonth && this.currentDate === true) {
 
             gridCells += '\t\t<td id="day' + curDay + '" class="today" headers="row' +
               rowCount + ' ' + this.dayNames[weekday] + '" role="gridcell" aria-selected="false">' + curDay + '</td>';
