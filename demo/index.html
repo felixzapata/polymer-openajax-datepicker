@@ -64,6 +64,26 @@
       </template>
     </demo-snippet>
 
+    <h2>Set init date</h2>
+    <demo-snippet>
+      <template>
+        <dom-bind id="demo3">
+          <template>
+            <div role="application">
+              <label for="date3">Date:</label>
+              <input id="date3" type="text" value="[[datepickerValue]]" />
+              <paper-button onclick="datePicker3.showDlg()">Select Date...</paper-button>
+            </div>
+            <polymer-openajax-datepicker locale="es" id="datePicker3" init-date="2013-02-08" date="{{datepickerValue}}"></polymer-openajax-datepicker>
+          </template>
+        </dom-bind>
+        <script>
+          var demo3 = document.querySelector('#demo2');
+          demo3.datepickerValue = '';
+        </script>
+      </template>
+    </demo-snippet>
+
   </div>
 </body>
 

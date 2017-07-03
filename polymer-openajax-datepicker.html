@@ -174,7 +174,13 @@
             value: 'en',
             notify: true,
             observer: '_localeChanged'
-          }
+          },
+          /**
+           * Optional init date for the calendar 
+           * Based on ISO 8601 
+           * http://momentjs.com/docs/#/parsing/
+           */
+          initDate: String
         };
       }
       connectedCallback() {
@@ -186,12 +192,13 @@
         this.$next = this.$id.querySelector('#bn_next');
         this.$grid = this.$id.querySelector('#cal');
 
-        this.dateObj = new Date();
+        this.dateObj = (typeof this.initDate !== 'undefined') ? moment(this.initDate) : moment();
+        console.log(this.dateObj.year())
 
-        this.curYear = this.dateObj.getFullYear();
+        this.curYear = this.dateObj.year();
         this.year = this.curYear;
 
-        this.curMonth = this.dateObj.getMonth();
+        this.curMonth = this.dateObj.month();
         this.month = this.curMonth;
         this.currentDate = true;
 
@@ -276,7 +283,7 @@
         var curDay = 1;
         var rowCount = 1;
         var $tbody = this.$grid.querySelector('tbody');
-        var dayOfMonth = this.dateObj.getDate();
+        var dayOfMonth = this.dateObj.date();
 
         var gridCells = '\t<tr id="row1">\n';
 
