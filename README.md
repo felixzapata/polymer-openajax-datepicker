@@ -21,6 +21,43 @@ $ bower install polymer-openajax-datepicker --save
 
 Or [download as ZIP](https://github.com/felixzapata/polymer-openajax-datepicker/archive/master.zip).
 
+
+
+### bModal
+Type: `Boolean`
+
+Default: false
+
+If datepicker should appear in a modal dialog box.
+
+### date
+Type: `String`
+
+The selected date, based on ISO 8601
+
+### locale
+Type: `String`
+
+Default: `en`
+
+To localize the calendar using Moment.js
+
+### initDate
+Type: `String`
+
+
+Optional init date for the calendar, based on ISO 8601
+
+### minDate
+Type: `String`
+
+Optional min date for the calendar, based on ISO 8601
+
+### maxDate
+Type: `String`
+
+Optional max date for the calendar, based on ISO 8601
+
 ## Keyboard support
 
 
