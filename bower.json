@@ -1,7 +1,7 @@
 {
   "name": "polymer-openajax-datepicker",
   "main": "polymer-openajax-datepicker.html",
-  "version": "0.2.2",
+  "version": "1.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/felixzapata/polymer-openajax-datepicker.git"
