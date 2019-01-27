@@ -98,6 +98,15 @@ $ polymer serve
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request
 
+
+## History
+
+### 1.0.0
+
++ Fixes [#7](https://github.com/felixzapata/polymer-openajax-datepicker/issues/7)
++ Fixes [#11](https://github.com/felixzapata/polymer-openajax-datepicker/issues/11)
++ New files structure
+
 ## History
 
 ### 0.2.2
