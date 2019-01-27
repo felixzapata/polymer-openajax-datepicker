@@ -8,82 +8,42 @@
   <title>polymer-openajax-datepicker demo</title>
 
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-
+  <link rel="import" href="../../polymer/lib/elements/custom-style.html">
+  <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
   <link rel="import" href="../../paper-button/paper-button.html">
   <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
   <link rel="import" href="../polymer-openajax-datepicker.html">
 
-  <custom-style>
-    <style is="custom-style" include="demo-pages-shared-styles">
+  <link rel="import" href="./default-language.html">
+  <link rel="import" href="./using-locale.html">
+  <link rel="import" href="./init-date.html">
+  <link rel="import" href="./init-max-date.html">
+  <link rel="import" href="./two-calendars.html">
 
-    </style>
+  <custom-style>
+    <style is="custom-style" include="demo-pages-shared-styles"></style>
   </custom-style>
 </head>
 
 <body>
   <div class="vertical-section-container centered">
     <h1>Basic polymer-openajax-datepicker demo</h1>
+
     <h2>Default language</h2>
-    <demo-snippet>
-      <template>
-        <dom-bind id="demo1">
-          <template>
-            <div role="application">
-              <label for="date">Date:</label>
-              <input id="date" type="text" value="[[datepickerValue]]" />
-              <paper-button onclick="datePicker.showDlg()">Select Date...</paper-button>
-            </div>
-            <polymer-openajax-datepicker id="datePicker" date="{{datepickerValue}}"></polymer-openajax-datepicker>
-          </template>
-        </dom-bind>
-        <script>
-          var demo1 = document.querySelector('#demo1');
-          demo1.datepickerValue = '';
-        </script>
-      </template>
-    </demo-snippet>
+    <default-language></default-language>
 
     <h2>Using locale attribute</h2>
-    <demo-snippet>
-      <template>
-        <dom-bind id="demo2">
-          <template>
-            <div role="application">
-              <label for="date2">Date:</label>
-              <input id="date2" type="text" value="[[datepickerValue]]" />
-              <paper-button onclick="datePicker2.showDlg()">Select Date...</paper-button>
-            </div>
-            <polymer-openajax-datepicker locale="es" id="datePicker2" date="{{datepickerValue}}"></polymer-openajax-datepicker>
-          </template>
-        </dom-bind>
-        <script>
-          var demo2 = document.querySelector('#demo2');
-          demo2.datepickerValue = '';
-        </script>
-      </template>
-    </demo-snippet>
+    <using-locale></using-locale>
 
     <h2>Set init date</h2>
-    <demo-snippet>
-      <template>
-        <dom-bind id="demo3">
-          <template>
-            <div role="application">
-              <label for="date3">Date:</label>
-              <input id="date3" type="text" value="[[datepickerValue]]" />
-              <paper-button onclick="datePicker3.showDlg()">Select Date...</paper-button>
-            </div>
-            <polymer-openajax-datepicker locale="es" id="datePicker3" init-date="2013-02-08" date="{{datepickerValue}}"></polymer-openajax-datepicker>
-          </template>
-        </dom-bind>
-        <script>
-          var demo3 = document.querySelector('#demo2');
-          demo3.datepickerValue = '';
-        </script>
-      </template>
-    </demo-snippet>
+    <init-date></init-date>
 
+    <h2>Set init date and max date</h2>
+    <init-max-date></init-max-date>
+
+    <h2>Two synchronized calendars</h2>
+    <two-calendars></two-calendars>
+    
   </div>
 </body>
 

@@ -1,0 +1,50 @@
+<dom-module id="default-language">
+  <template>
+    <div role="application">
+      <label for="date">Date:</label>
+      <input id="date" type="text" value="[[dateFormat(datePickerValue, 'L')]]" />
+      <paper-button>Select Date...</paper-button>
+    </div>
+    <polymer-openajax-datepicker id="datePicker" date="{{datePickerValue}}"></polymer-openajax-datepicker>
+  </template>
+</dom-module>
+<script>
+  class defaultLanguage extends Polymer.Element {
+    static get is() { return 'default-language'; }
+
+    static get properties() {
+      return {
+        datePickerValue: {
+          type: String,
+          value: ''
+        }
+      };
+    }
+
+    // eslint-disable-next-line
+    dateFormat(date, format) {
+      if(date !== '') {
+        return window.moment(date).format(format);
+      }
+      return '';
+    }
+
+    _openCalendar() {
+      this.shadowRoot.querySelector('#datePicker').showDlg();
+    }
+
+
+    connectedCallback() {
+      super.connectedCallback();
+      this.openCalendarHandler = this._openCalendar.bind(this);
+      this.shadowRoot.querySelector('paper-button').addEventListener('click', this.openCalendarHandler);
+    }
+
+    disconnectedCallback() {
+      super.disconnectedCallback();
+      this.openCalendarHandler = this._openCalendar.bind(this);
+      this.shadowRoot.querySelector('paper-button').addEventListener('click', this.openCalendarHandler);
+    }
+  }
+  window.customElements.define(defaultLanguage.is, defaultLanguage);
+</script>

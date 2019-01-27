@@ -1,0 +1,76 @@
+<dom-module id="two-calendars">
+  <template>
+    <div role="application">
+      <label for="date">Date:</label>
+      <input id="date" type="text" value="[[dateFormat(datePickerValue, 'L')]]" />
+      <paper-button id="d1">Select Date...</paper-button>
+    </div>
+    <polymer-openajax-datepicker id="datePicker5" init-date="2013-03-08" date="{{datePickerValue}}"></polymer-openajax-datepicker>
+    <div role="application">
+      <label for="date2">Date:</label>
+      <input id="date2" type="text" value="[[dateFormat(datePickerValue2, 'L')]]" />
+      <paper-button id="d2">Select Date...</paper-button>
+    </div>
+    <polymer-openajax-datepicker id="datePicker5_1" init-date="{{dateFrom}}" min-date="{{dateFrom}}" date="{{datePickerValue2}}"></polymer-openajax-datepicker>
+  </template>
+</dom-module>
+<script>
+  class twoCalendars extends Polymer.Element {
+    static get is() { return 'two-calendars'; }
+
+    static get properties() {
+      return {
+        datePickerValue: {
+          type: String,
+          value: '',
+          observer: '_datePickerValueChanged'
+        },
+        datePickerValue2: {
+          type: String,
+          value: ''
+        },
+        dateFrom: {
+          type: String,
+          value: ''
+        }
+      };
+    }
+
+    // eslint-disable-next-line
+    dateFormat(date, format) {
+      if(date !== '') {
+        return window.moment(date).format(format);
+      }
+      return '';
+    }
+
+    _datePickerValueChanged(value) {
+      if(value !== '') {
+        this.set('dateFrom', value);
+      }
+    }
+
+    _openFirstCalendar() {
+      this.shadowRoot.querySelector('#datePicker5').showDlg();
+    }
+
+    _openSecondCalendar() {
+      this.shadowRoot.querySelector('#datePicker5_1').showDlg();
+    }
+
+    connectedCallback() {
+      super.connectedCallback();
+      this.openFirstHandler = this._openFirstCalendar.bind(this);
+      this.secondFirstHandler = this._openSecondCalendar.bind(this);
+      this.shadowRoot.querySelector('#d1').addEventListener('click', this.openFirstHandler);
+      this.shadowRoot.querySelector('#d2').addEventListener('click', this.secondFirstHandler);
+    }
+
+    disconnectedCallback() {
+      super.disconnectedCallback();
+      this.shadowRoot.querySelector('#d1').removeEventListener('click', this.openFirstHandler);
+      this.shadowRoot.querySelector('#d2').removeEventListener('click', this.secondFirstHandler);
+    }
+  }
+  window.customElements.define(twoCalendars.is, twoCalendars);
+</script>
