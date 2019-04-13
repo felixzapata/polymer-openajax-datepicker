@@ -42,8 +42,7 @@
 
     disconnectedCallback() {
       super.disconnectedCallback();
-      this.openCalendarHandler = this._openCalendar.bind(this);
-      this.shadowRoot.querySelector('paper-button').addEventListener('click', this.openCalendarHandler);
+      this.shadowRoot.querySelector('paper-button').removeEventListener('click', this.openCalendarHandler);
     }
   }
   window.customElements.define(initMaxDate.is, initMaxDate);
